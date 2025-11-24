@@ -7,7 +7,7 @@ class AppStore {
       web3: null,
       contract: null,
       accounts: [],
-      contractAddress: '',
+      contractAddress: '0x9450456c3a25a57b9725e49a3ec4e1b71244ff86',
       activeTab: 'RoleManagement',
       tabs: [
         { id: 'RoleManagement', name: '角色管理' },
