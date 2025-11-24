@@ -1,6 +1,7 @@
 // src/services/contractService.js
 import Web3 from 'web3'
 import contractABI from '../contractABI.json'
+import appStore from '../store/appStore.js'
 
 class ContractService {
   constructor() {
@@ -18,6 +19,11 @@ class ContractService {
     this.web3 = new Web3(window.ethereum)
     await window.ethereum.request({ method: 'eth_requestAccounts' })
     this.accounts = await this.web3.eth.getAccounts()
+
+    // 更新store中的web3和accounts
+    const state = appStore.getState()
+    state.web3 = this.web3
+    state.accounts = this.accounts
 
     return {
       web3: this.web3,
@@ -42,13 +48,20 @@ class ContractService {
 
     this.contract = new this.web3.eth.Contract(contractABI, contractAddress)
 
-    // 验证合约是否有效
+    // 验证合约是否有效 - 通过调用一个简单的只读方法
     try {
-      await this.contract.methods.address().call()
+      // 使用零地址调用getRole方法，这总是会返回一个值（即使为0），但可以验证合约是否存在
+      await this.contract.methods.getRole('0x0000000000000000000000000000000000000000').call()
     } catch (error) {
       this.contract = null
+      console.error('合约验证失败:', error)
       throw new Error('合约地址无效，请确认合约已部署')
     }
+
+    // 更新store中的contract
+    const state = appStore.getState()
+    state.contract = this.contract
+    state.contractAddress = contractAddress
 
     return this.contract
   }
@@ -129,6 +142,13 @@ class ContractService {
       .send({ from: this.accounts[0] })
   }
 
+  async logServiceAction(productId, serviceDescription, partsReplaced) {
+    this._validateContractCall()
+    return await this.contract.methods
+      .logServiceAction(productId, serviceDescription, partsReplaced)
+      .send({ from: this.accounts[0] })
+  }
+
   // 查询验证相关方法
   async verifyOwnership(productId) {
     this._validateContractCall()
@@ -154,6 +174,28 @@ class ContractService {
     return await this.contract.methods
       .getOwnershipHistory(productId)
       .call({ from: this.accounts[0] })
+  }
+
+  async getWarrantyHistory(productId) {
+    this._validateContractCall()
+    return await this.contract.methods
+      .getWarrantyHistory(productId)
+      .call({ from: this.accounts[0] })
+  }
+
+  async getUserProducts(userAddress) {
+    this._validateContractCall()
+    return await this.contract.methods.getUserProducts(userAddress).call({ from: this.accounts[0] })
+  }
+
+  async getRole(userAddress) {
+    this._validateContractCall()
+    return await this.contract.methods.getRole(userAddress).call({ from: this.accounts[0] })
+  }
+
+  async isServiceCenter(userAddress) {
+    this._validateContractCall()
+    return await this.contract.methods.isServiceCenter(userAddress).call({ from: this.accounts[0] })
   }
 
   // 验证合约调用的私有方法
