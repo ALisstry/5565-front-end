@@ -44,7 +44,7 @@
             <option value="1">制造商 (Manufacturer)</option>
             <option value="2">零售商 (Retailer)</option>
             <option value="3">消费者 (Customer)</option>
-            <option value="4">服务中心 (ServiceCenter)</option>
+            <!-- <option value="4">服务中心 (ServiceCenter)</option> -->
           </select>
         </div>
         <button @click="assignRole">分配角色</button>
@@ -168,7 +168,7 @@
           <select v-model="state.processWarrantyForm.status">
             <option value="1">批准 (Approved)</option>
             <option value="2">拒绝 (Rejected)</option>
-            <option value="3">完成 (Completed)</option>
+            <!-- <option value="3">完成 (Completed)</option> -->
           </select>
         </div>
         <div class="form-group">
