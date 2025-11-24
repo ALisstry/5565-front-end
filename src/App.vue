@@ -601,19 +601,36 @@ export default {
   box-sizing: border-box;
 }
 
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 body {
   font-family: Arial, sans-serif;
   background-color: #f5f5f5;
   padding: 20px;
+  min-height: 100vh;
+  margin: 0;
 }
 
 .container {
   max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
   background: white;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  flex: 1;
 }
 
 h1 {
@@ -752,5 +769,26 @@ button:disabled {
   padding: 15px;
   border-radius: 5px;
   margin-bottom: 20px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  .container {
+    padding: 15px;
+  }
+
+  .account-info input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .tab button {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
 }
 </style>
