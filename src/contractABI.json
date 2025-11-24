@@ -1,0 +1,1013 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "serviceCenter",
+        "type": "address"
+      }
+    ],
+    "name": "addServiceCenter",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "internalType": "enum DecentralizedProductProvenance.Role",
+        "name": "role",
+        "type": "uint8"
+      }
+    ],
+    "name": "assignRole",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "productId",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "serviceDescription",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "partsReplaced",
+        "type": "string"
+      }
+    ],
+    "name": "logServiceAction",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "string",
+        "name": "productId",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "from",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "to",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum DecentralizedProductProvenance.Role",
+        "name": "fromRole",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum DecentralizedProductProvenance.Role",
+        "name": "toRole",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "details",
+        "type": "string"
+      }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "productId",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "claimId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "enum DecentralizedProductProvenance.ClaimStatus",
+        "name": "status",
+        "type": "uint8"
+      },
+      {
+        "internalType": "string",
+        "name": "serviceNotes",
+        "type": "string"
+      }
+    ],
+    "name": "processWarrantyClaim",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "string",
+        "name": "productId",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "manufacturer",
+        "type": "address"
+      }
+    ],
+    "name": "ProductRegistered",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "productId",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "serialNumber",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "model",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "specifications",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "warrantyDuration",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "maxWarrantyClaims",
+        "type": "uint256"
+      }
+    ],
+    "name": "registerProduct",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "productId",
+        "type": "string"
+      },
+      {
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "transactionDetails",
+        "type": "string"
+      }
+    ],
+    "name": "resellProduct",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum DecentralizedProductProvenance.Role",
+        "name": "role",
+        "type": "uint8"
+      }
+    ],
+    "name": "RoleAssigned",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "productId",
+        "type": "string"
+      },
+      {
+        "internalType": "address",
+        "name": "customer",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "transactionDetails",
+        "type": "string"
+      }
+    ],
+    "name": "sellToCustomer",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "productId",
+        "type": "string"
+      },
+      {
+        "internalType": "bool",
+        "name": "isVisible",
+        "type": "bool"
+      }
+    ],
+    "name": "setProductVisibility",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "productId",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "description",
+        "type": "string"
+      }
+    ],
+    "name": "submitWarrantyClaim",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "productId",
+        "type": "string"
+      },
+      {
+        "internalType": "address",
+        "name": "retailer",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "transactionDetails",
+        "type": "string"
+      }
+    ],
+    "name": "transferToRetailer",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "productId",
+        "type": "string"
+      }
+    ],
+    "name": "updateWarrantyStatus",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "string",
+        "name": "productId",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "claimId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum DecentralizedProductProvenance.ClaimStatus",
+        "name": "status",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "serviceCenter",
+        "type": "address"
+      }
+    ],
+    "name": "WarrantyClaimProcessed",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "string",
+        "name": "productId",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "claimId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "customer",
+        "type": "address"
+      }
+    ],
+    "name": "WarrantyClaimSubmitted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "string",
+        "name": "productId",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum DecentralizedProductProvenance.WarrantyStatus",
+        "name": "newStatus",
+        "type": "uint8"
+      }
+    ],
+    "name": "WarrantyStatusChanged",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "admin",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "authorizedServiceCenters",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "productId",
+        "type": "string"
+      }
+    ],
+    "name": "checkWarrantyStatus",
+    "outputs": [
+      {
+        "internalType": "enum DecentralizedProductProvenance.WarrantyStatus",
+        "name": "status",
+        "type": "uint8"
+      },
+      {
+        "internalType": "uint256",
+        "name": "remainingClaims",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "expiryDate",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "productId",
+        "type": "string"
+      }
+    ],
+    "name": "getOwnershipHistory",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "owner",
+            "type": "address"
+          },
+          {
+            "internalType": "enum DecentralizedProductProvenance.Role",
+            "name": "role",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint256",
+            "name": "transferTimestamp",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "transactionDetails",
+            "type": "string"
+          },
+          {
+            "internalType": "bool",
+            "name": "isVisible",
+            "type": "bool"
+          }
+        ],
+        "internalType": "struct DecentralizedProductProvenance.OwnershipRecord[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "productId",
+        "type": "string"
+      }
+    ],
+    "name": "getProductDetails",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      },
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "startDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "duration",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maxClaims",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "usedClaims",
+            "type": "uint256"
+          },
+          {
+            "internalType": "enum DecentralizedProductProvenance.WarrantyStatus",
+            "name": "status",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct DecentralizedProductProvenance.WarrantyInfo",
+        "name": "",
+        "type": "tuple"
+      },
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      }
+    ],
+    "name": "getRole",
+    "outputs": [
+      {
+        "internalType": "enum DecentralizedProductProvenance.Role",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      }
+    ],
+    "name": "getUserProducts",
+    "outputs": [
+      {
+        "internalType": "string[]",
+        "name": "",
+        "type": "string[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "productId",
+        "type": "string"
+      }
+    ],
+    "name": "getWarrantyHistory",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "claimId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "customer",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "serviceCenter",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "serviceNotes",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "submitTimestamp",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "processTimestamp",
+            "type": "uint256"
+          },
+          {
+            "internalType": "enum DecentralizedProductProvenance.ClaimStatus",
+            "name": "status",
+            "type": "uint8"
+          },
+          {
+            "internalType": "bool",
+            "name": "isVisible",
+            "type": "bool"
+          }
+        ],
+        "internalType": "struct DecentralizedProductProvenance.WarrantyClaim[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      }
+    ],
+    "name": "isServiceCenter",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "ownershipHistory",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "owner",
+        "type": "address"
+      },
+      {
+        "internalType": "enum DecentralizedProductProvenance.Role",
+        "name": "role",
+        "type": "uint8"
+      },
+      {
+        "internalType": "uint256",
+        "name": "transferTimestamp",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "transactionDetails",
+        "type": "string"
+      },
+      {
+        "internalType": "bool",
+        "name": "isVisible",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "name": "products",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "productId",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "serialNumber",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "model",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "specifications",
+        "type": "string"
+      },
+      {
+        "internalType": "address",
+        "name": "manufacturer",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "currentOwner",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "manufactureTimestamp",
+        "type": "uint256"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "startDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "duration",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maxClaims",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "usedClaims",
+            "type": "uint256"
+          },
+          {
+            "internalType": "enum DecentralizedProductProvenance.WarrantyStatus",
+            "name": "status",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct DecentralizedProductProvenance.WarrantyInfo",
+        "name": "warranty",
+        "type": "tuple"
+      },
+      {
+        "internalType": "bool",
+        "name": "exists",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      },
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "productVisibility",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "roles",
+    "outputs": [
+      {
+        "internalType": "enum DecentralizedProductProvenance.Role",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "userProducts",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "productId",
+        "type": "string"
+      }
+    ],
+    "name": "verifyProductOwnership",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "isOwner",
+        "type": "bool"
+      },
+      {
+        "internalType": "bool",
+        "name": "isAuthentic",
+        "type": "bool"
+      },
+      {
+        "internalType": "address",
+        "name": "currentOwner",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "manufacturer",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "warrantyClaims",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "claimId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "customer",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "serviceCenter",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "description",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "serviceNotes",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "submitTimestamp",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "processTimestamp",
+        "type": "uint256"
+      },
+      {
+        "internalType": "enum DecentralizedProductProvenance.ClaimStatus",
+        "name": "status",
+        "type": "uint8"
+      },
+      {
+        "internalType": "bool",
+        "name": "isVisible",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]
