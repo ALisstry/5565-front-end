@@ -3,20 +3,20 @@
     <h1>🔗 Product Provenance dApp</h1>
 
     <div class="account-info" id="accountInfo">
-      <strong>连接状态:</strong>
+      <strong>Connection Status:</strong>
       <span :class="connectionStatusClass">{{ connectionStatusText }}</span
       ><br />
-      <strong>当前账户:</strong> <span>{{ currentAccount || '无' }}</span
+      <strong>Current Account:</strong> <span>{{ currentAccount || 'None' }}</span
       ><br />
-      <strong>合约地址:</strong>
+      <strong>Contract Address:</strong>
       <input
         type="text"
         v-model="state.contractAddress"
-        placeholder="输入合约地址"
+        placeholder="Enter contract address"
         style="width: 400px"
       />
-      <button @click="connectWallet">连接钱包</button>
-      <button @click="loadContract">加载合约</button>
+      <button @click="connectWallet">Connect Wallet</button>
+      <button @click="loadContract">Load Contract</button>
     </div>
 
     <div class="tab">
@@ -30,34 +30,34 @@
       </button>
     </div>
 
-    <!-- 角色管理标签 -->
+    <!-- Role Management Tab -->
     <div v-show="state.activeTab === 'RoleManagement'" class="tabcontent">
       <div class="section">
-        <h2>分配角色</h2>
+        <h2>Assign Role</h2>
         <div class="form-group">
-          <label>用户地址:</label>
+          <label>User Address:</label>
           <input type="text" v-model="state.roleForm.userAddress" placeholder="0x..." />
         </div>
         <div class="form-group">
-          <label>角色:</label>
+          <label>Role:</label>
           <select v-model="state.roleForm.role">
-            <option value="1">制造商 (Manufacturer)</option>
-            <option value="2">零售商 (Retailer)</option>
-            <option value="3">消费者 (Customer)</option>
-            <!-- <option value="4">服务中心 (ServiceCenter)</option> -->
+            <option value="1">Manufacturer</option>
+            <option value="2">Retailer</option>
+            <option value="3">Customer</option>
+            <!-- <option value="4">Service Center</option> -->
           </select>
         </div>
-        <button @click="assignRole">分配角色</button>
+        <button @click="assignRole">Assign Role</button>
         <div id="roleResult" class="result" v-html="state.results.roleResult"></div>
       </div>
 
       <div class="section">
-        <h2>添加服务中心</h2>
+        <h2>Add Service Center</h2>
         <div class="form-group">
-          <label>服务中心地址:</label>
+          <label>Service Center Address:</label>
           <input type="text" v-model="state.serviceCenterForm.address" placeholder="0x..." />
         </div>
-        <button @click="addServiceCenter">添加服务中心</button>
+        <button @click="addServiceCenter">Add Service Center</button>
         <div
           id="serviceCenterResult"
           class="result"
@@ -66,24 +66,24 @@
       </div>
     </div>
 
-    <!-- 产品管理标签 -->
+    <!-- Product Management Tab -->
     <div v-show="state.activeTab === 'Product'" class="tabcontent">
       <div class="section">
-        <h2>注册新产品</h2>
+        <h2>Register New Product</h2>
         <div class="form-group">
-          <label>产品ID:</label>
+          <label>Product ID:</label>
           <input type="text" v-model="state.productForm.productId" placeholder="WATCH001" />
         </div>
         <div class="form-group">
-          <label>序列号:</label>
+          <label>Serial Number:</label>
           <input type="text" v-model="state.productForm.serialNumber" placeholder="SN123456" />
         </div>
         <div class="form-group">
-          <label>型号:</label>
+          <label>Model:</label>
           <input type="text" v-model="state.productForm.model" placeholder="Apple Watch" />
         </div>
         <div class="form-group">
-          <label>规格:</label>
+          <label>Specifications:</label>
           <input
             type="text"
             v-model="state.productForm.specifications"
@@ -91,121 +91,121 @@
           />
         </div>
         <div class="form-group">
-          <label>保修时长 (天):</label>
+          <label>Warranty Duration (Days):</label>
           <input type="number" v-model.number="state.productForm.warrantyDuration" />
         </div>
         <div class="form-group">
-          <label>最大保修次数:</label>
+          <label>Max Warranty Claims:</label>
           <input type="number" v-model.number="state.productForm.maxClaims" />
         </div>
-        <button @click="registerProduct">注册产品</button>
+        <button @click="registerProduct">Register Product</button>
         <div id="registerResult" class="result" v-html="state.results.registerResult"></div>
       </div>
 
       <div class="section">
-        <h2>转移所有权</h2>
+        <h2>Transfer Ownership</h2>
         <div class="form-group">
-          <label>产品ID:</label>
+          <label>Product ID:</label>
           <input type="text" v-model="state.transferForm.productId" placeholder="WATCH001" />
         </div>
         <div class="form-group">
-          <label>目标地址:</label>
+          <label>Target Address:</label>
           <input type="text" v-model="state.transferForm.targetAddress" placeholder="0x..." />
         </div>
         <div class="form-group">
-          <label>交易详情:</label>
+          <label>Transaction Details:</label>
           <input
             type="text"
             v-model="state.transferForm.transactionDetails"
-            placeholder="描述转移原因"
+            placeholder="Describe reason for transfer"
           />
         </div>
         <div class="form-group">
-          <label>转移类型:</label>
+          <label>Transfer Type:</label>
           <select v-model="state.transferForm.transferType">
-            <option value="manufacturerToRetailer">制造商 → 零售商</option>
-            <option value="retailerToCustomer">零售商 → 消费者</option>
-            <option value="customerToCustomer">消费者 → 消费者 (转售)</option>
+            <option value="manufacturerToRetailer">Manufacturer → Retailer</option>
+            <option value="retailerToCustomer">Retailer → Customer</option>
+            <option value="customerToCustomer">Customer → Customer (Resale)</option>
           </select>
         </div>
-        <button @click="transferOwnership">转移所有权</button>
+        <button @click="transferOwnership">Transfer Ownership</button>
         <div id="transferResult" class="result" v-html="state.results.transferResult"></div>
       </div>
     </div>
 
-    <!-- 保修管理标签 -->
+    <!-- Warranty Management Tab -->
     <div v-show="state.activeTab === 'Warranty'" class="tabcontent">
       <div class="section">
-        <h2>提交保修申请</h2>
+        <h2>Submit Warranty Claim</h2>
         <div class="form-group">
-          <label>产品ID:</label>
+          <label>Product ID:</label>
           <input type="text" v-model="state.warrantyClaimForm.productId" placeholder="WATCH001" />
         </div>
         <div class="form-group">
-          <label>问题描述:</label>
+          <label>Description of Issue:</label>
           <textarea
             v-model="state.warrantyClaimForm.description"
             rows="3"
-            placeholder="详细描述产品问题..."
+            placeholder="Describe the product issue in detail..."
           ></textarea>
         </div>
-        <button @click="submitWarrantyClaim">提交保修申请</button>
+        <button @click="submitWarrantyClaim">Submit Warranty Claim</button>
         <div id="claimResult" class="result" v-html="state.results.claimResult"></div>
       </div>
 
       <div class="section">
-        <h2>处理保修申请</h2>
+        <h2>Process Warranty Claim</h2>
         <div class="form-group">
-          <label>产品ID:</label>
+          <label>Product ID:</label>
           <input type="text" v-model="state.processWarrantyForm.productId" placeholder="WATCH001" />
         </div>
         <div class="form-group">
-          <label>申请ID:</label>
+          <label>Claim ID:</label>
           <input type="number" v-model.number="state.processWarrantyForm.claimId" />
         </div>
         <div class="form-group">
-          <label>处理状态:</label>
+          <label>Status:</label>
           <select v-model="state.processWarrantyForm.status">
-            <option value="1">批准 (Approved)</option>
-            <option value="2">拒绝 (Rejected)</option>
-            <!-- <option value="3">完成 (Completed)</option> -->
+            <option value="1">Approved</option>
+            <option value="2">Rejected</option>
+            <!-- <option value="3">Completed</option> -->
           </select>
         </div>
         <div class="form-group">
-          <label>服务说明:</label>
+          <label>Service Notes:</label>
           <textarea
             v-model="state.processWarrantyForm.serviceNotes"
             rows="3"
-            placeholder="维修详情和更换部件..."
+            placeholder="Repair details and replaced parts..."
           ></textarea>
         </div>
-        <button @click="processWarrantyClaim">处理保修申请</button>
+        <button @click="processWarrantyClaim">Process Warranty Claim</button>
         <div id="processResult" class="result" v-html="state.results.processResult"></div>
       </div>
 
       <div class="section">
-        <h2>记录服务操作</h2>
+        <h2>Log Service Action</h2>
         <div class="form-group">
-          <label>产品ID:</label>
+          <label>Product ID:</label>
           <input type="text" v-model="state.serviceActionForm.productId" placeholder="WATCH001" />
         </div>
         <div class="form-group">
-          <label>服务描述:</label>
+          <label>Service Description:</label>
           <textarea
             v-model="state.serviceActionForm.serviceDescription"
             rows="3"
-            placeholder="服务描述..."
+            placeholder="Service description..."
           ></textarea>
         </div>
         <div class="form-group">
-          <label>更换部件:</label>
+          <label>Parts Replaced:</label>
           <textarea
             v-model="state.serviceActionForm.partsReplaced"
             rows="3"
-            placeholder="更换的部件..."
+            placeholder="Replaced parts..."
           ></textarea>
         </div>
-        <button @click="logServiceAction">记录服务</button>
+        <button @click="logServiceAction">Log Service</button>
         <div
           id="serviceActionResult"
           class="result"
@@ -214,55 +214,55 @@
       </div>
     </div>
 
-    <!-- 查询验证标签 -->
+    <!-- Query & Verification Tab -->
     <div v-show="state.activeTab === 'Query'" class="tabcontent">
       <div class="section">
-        <h2>验证产品所有权</h2>
+        <h2>Verify Product Ownership</h2>
         <div class="form-group">
-          <label>产品ID:</label>
+          <label>Product ID:</label>
           <input type="text" v-model="state.verifyForm.productId" placeholder="WATCH001" />
         </div>
-        <button @click="verifyOwnership">验证所有权</button>
+        <button @click="verifyOwnership">Verify Ownership</button>
         <div id="verifyResult" class="result" v-html="state.results.verifyResult"></div>
       </div>
 
       <div class="section">
-        <h2>查询产品详情</h2>
+        <h2>Query Product Details</h2>
         <div class="form-group">
-          <label>产品ID:</label>
+          <label>Product ID:</label>
           <input type="text" v-model="state.queryForm.productId" placeholder="WATCH001" />
         </div>
-        <button @click="getProductDetails">查询详情</button>
+        <button @click="getProductDetails">Query Details</button>
         <div id="detailsResult" class="result" v-html="state.results.detailsResult"></div>
       </div>
 
       <div class="section">
-        <h2>检查保修状态</h2>
+        <h2>Check Warranty Status</h2>
         <div class="form-group">
-          <label>产品ID:</label>
+          <label>Product ID:</label>
           <input type="text" v-model="state.warrantyCheckForm.productId" placeholder="WATCH001" />
         </div>
-        <button @click="checkWarrantyStatus">检查状态</button>
+        <button @click="checkWarrantyStatus">Check Status</button>
         <div id="warrantyResult" class="result" v-html="state.results.warrantyResult"></div>
       </div>
 
       <div class="section">
-        <h2>查看所有权历史</h2>
+        <h2>View Ownership History</h2>
         <div class="form-group">
-          <label>产品ID:</label>
+          <label>Product ID:</label>
           <input type="text" v-model="state.historyForm.productId" placeholder="WATCH001" />
         </div>
-        <button @click="getOwnershipHistory">查看历史</button>
+        <button @click="getOwnershipHistory">View History</button>
         <div id="historyResult" class="result" v-html="state.results.historyResult"></div>
       </div>
 
       <div class="section">
-        <h2>查看保修历史</h2>
+        <h2>View Warranty History</h2>
         <div class="form-group">
-          <label>产品ID:</label>
+          <label>Product ID:</label>
           <input type="text" v-model="state.warrantyHistoryForm.productId" placeholder="WATCH001" />
         </div>
-        <button @click="getWarrantyHistory">查看保修历史</button>
+        <button @click="getWarrantyHistory">View Warranty History</button>
         <div
           id="warrantyHistoryResult"
           class="result"
@@ -290,14 +290,14 @@ export default {
   },
   computed: {
     connectionStatusText() {
-      // 检查contractService或本地状态中的web3实例
-      return this.state.web3 || contractService.isConnected() ? '已连接' : '未连接'
+      // Check web3 instance in contractService or local state
+      return this.state.web3 || contractService.isConnected() ? 'Connected' : 'Not Connected'
     },
     connectionStatusClass() {
       return this.state.web3 || contractService.isConnected() ? 'success' : ''
     },
     currentAccount() {
-      // 优先从本地状态获取，然后从contractService获取
+      // Get from local state first, then from contractService
       if (this.state.accounts && this.state.accounts.length > 0) {
         return this.state.accounts[0]
       }
@@ -312,61 +312,65 @@ export default {
     async connectWallet() {
       try {
         const result = await contractService.connectWallet()
-        // 确保更新store中的web3和accounts
+        // Ensure web3 and accounts are updated in store
         this.state.web3 = result.web3
         this.state.accounts = result.accounts
-        appStore.showStatus('钱包连接成功!', 'success')
-        // 强制更新计算属性
+        appStore.showStatus('Wallet connected successfully!', 'success')
+        // Force update computed properties
         this.$forceUpdate()
       } catch (error) {
-        appStore.showStatus('连接失败: ' + error.message, 'error')
+        appStore.showStatus('Connection failed: ' + error.message, 'error')
       }
     },
 
     async loadContract() {
       try {
         await contractService.loadContract(this.state.contractAddress)
-        appStore.showStatus('合约加载成功!', 'success')
+        appStore.showStatus('Contract loaded successfully!', 'success')
       } catch (error) {
-        appStore.showStatus('合约加载失败: ' + error.message, 'error')
+        appStore.showStatus('Failed to load contract: ' + error.message, 'error')
       }
     },
 
     async assignRole() {
       try {
         await contractService.assignRole(this.state.roleForm.userAddress, this.state.roleForm.role)
-        appStore.updateResult('roleResult', '角色分配成功!', 'success')
+        appStore.updateResult('roleResult', 'Role assigned successfully!', 'success')
       } catch (error) {
-        appStore.updateResult('roleResult', '错误: ' + error.message, 'error')
+        appStore.updateResult('roleResult', 'Error: ' + error.message, 'error')
       }
     },
 
     async addServiceCenter() {
       try {
         await contractService.addServiceCenter(this.state.serviceCenterForm.address)
-        appStore.updateResult('serviceCenterResult', '服务中心添加成功!', 'success')
+        appStore.updateResult(
+          'serviceCenterResult',
+          'Service center added successfully!',
+          'success',
+        )
       } catch (error) {
-        appStore.updateResult('serviceCenterResult', '错误: ' + error.message, 'error')
+        appStore.updateResult('serviceCenterResult', 'Error: ' + error.message, 'error')
       }
     },
 
     async registerProduct() {
       try {
         await contractService.registerProduct(this.state.productForm)
-        appStore.updateResult('registerResult', '产品注册成功!', 'success')
+        appStore.updateResult('registerResult', 'Product registered successfully!', 'success')
         appStore.resetForm('productForm')
       } catch (error) {
-        appStore.updateResult('registerResult', '错误: ' + error.message, 'error')
+        appStore.updateResult('registerResult', 'Error: ' + error.message, 'error')
       }
     },
 
     async transferOwnership() {
       try {
         await contractService.transferOwnership(this.state.transferForm)
-        appStore.updateResult('transferResult', '所有权转移成功!', 'success')
+        appStore.updateResult('transferResult', 'Ownership transferred successfully!', 'success')
         appStore.resetForm('transferForm')
       } catch (error) {
-        appStore.updateResult('transferResult', '错误: ' + error.message, 'error')
+        appStore.updateResult('transferResult', 'Error: ' + error.message, 'error')
       }
     },
 
@@ -378,10 +382,14 @@ export default {
         )
 
         const claimId = result.events.WarrantyClaimSubmitted.returnValues.claimId
-        appStore.updateResult('claimResult', `保修申请提交成功! Claim ID: ${claimId}`, 'success')
+        appStore.updateResult(
+          'claimResult',
+          `Warranty claim submitted successfully! Claim ID: ${claimId}`,
+          'success',
+        )
         appStore.resetForm('warrantyClaimForm')
       } catch (error) {
-        appStore.updateResult('claimResult', '错误: ' + error.message, 'error')
+        appStore.updateResult('claimResult', 'Error: ' + error.message, 'error')
       }
     },
 
@@ -393,10 +401,10 @@ export default {
           this.state.processWarrantyForm.status,
           this.state.processWarrantyForm.serviceNotes,
         )
-        appStore.updateResult('processResult', '保修申请处理成功!', 'success')
+        appStore.updateResult('processResult', 'Warranty claim processed successfully!', 'success')
         appStore.resetForm('processWarrantyForm')
       } catch (error) {
-        appStore.updateResult('processResult', '错误: ' + error.message, 'error')
+        appStore.updateResult('processResult', 'Error: ' + error.message, 'error')
       }
     },
 
@@ -407,10 +415,10 @@ export default {
           this.state.serviceActionForm.serviceDescription,
           this.state.serviceActionForm.partsReplaced,
         )
-        appStore.updateResult('serviceActionResult', '服务记录成功!', 'success')
+        appStore.updateResult('serviceActionResult', 'Service logged successfully!', 'success')
         appStore.resetForm('serviceActionForm')
       } catch (error) {
-        appStore.updateResult('serviceActionResult', '错误: ' + error.message, 'error')
+        appStore.updateResult('serviceActionResult', 'Error: ' + error.message, 'error')
       }
     },
 
@@ -419,16 +427,16 @@ export default {
         const result = await contractService.verifyOwnership(this.state.verifyForm.productId)
 
         let html = '<div class="info">'
-        html += '<strong>验证结果:</strong><br>'
-        html += '您是所有者: ' + (result[0] ? '✅ 是' : '❌ 否') + '<br>'
-        html += '产品真实: ' + (result[1] ? '✅ 是' : '❌ 否') + '<br>'
-        html += '当前所有者: ' + result[2] + '<br>'
-        html += '制造商: ' + result[3] + '<br>'
+        html += '<strong>Verification Result:</strong><br>'
+        html += 'You are owner: ' + (result[0] ? '✅ Yes' : '❌ No') + '<br>'
+        html += 'Product authentic: ' + (result[1] ? '✅ Yes' : '❌ No') + '<br>'
+        html += 'Current owner: ' + result[2] + '<br>'
+        html += 'Manufacturer: ' + result[3] + '<br>'
         html += '</div>'
 
         this.state.results.verifyResult = html
       } catch (error) {
-        appStore.updateResult('verifyResult', '错误: ' + error.message, 'error')
+        appStore.updateResult('verifyResult', 'Error: ' + error.message, 'error')
       }
     },
 
@@ -437,32 +445,34 @@ export default {
         const result = await contractService.getProductDetails(this.state.queryForm.productId)
 
         let html = '<div class="info">'
-        html += '<strong>产品详情:</strong><br>'
-        html += '序列号: ' + result[0] + '<br>'
-        html += '型号: ' + result[1] + '<br>'
-        html += '规格: ' + result[2] + '<br>'
-        html += '制造商: ' + result[3] + '<br>'
-        html += '当前所有者: ' + result[4] + '<br>'
+        html += '<strong>Product Details:</strong><br>'
+        html += 'Serial Number: ' + result[0] + '<br>'
+        html += 'Model: ' + result[1] + '<br>'
+        html += 'Specifications: ' + result[2] + '<br>'
+        html += 'Manufacturer: ' + result[3] + '<br>'
+        html += 'Current Owner: ' + result[4] + '<br>'
         html +=
-          '生产时间: ' + new Date(parseInt(result[5].toString()) * 1000).toLocaleString() + '<br>'
+          'Production Time: ' +
+          new Date(parseInt(result[5].toString()) * 1000).toLocaleString() +
+          '<br>'
 
-        // 保修信息
+        // Warranty Information
         const warranty = result[6]
-        html += '<strong>保修信息:</strong><br>'
+        html += '<strong>Warranty Information:</strong><br>'
         html +=
-          '开始日期: ' +
+          'Start Date: ' +
           new Date(parseInt(warranty.startDate.toString()) * 1000).toLocaleString() +
           '<br>'
-        html += '持续时间: ' + parseInt(warranty.duration.toString()) / (24 * 60 * 60) + ' 天<br>'
-        html += '最大申请次数: ' + warranty.maxClaims.toString() + '<br>'
-        html += '已使用次数: ' + warranty.usedClaims.toString() + '<br>'
-        html += '状态: ' + this.getWarrantyStatusText(warranty.status) + '<br>'
-        html += '可见性: ' + (result[7] ? '✅ 可见' : '❌ 不可见') + '<br>'
+        html += 'Duration: ' + parseInt(warranty.duration.toString()) / (24 * 60 * 60) + ' days<br>'
+        html += 'Max Claims: ' + warranty.maxClaims.toString() + '<br>'
+        html += 'Used Claims: ' + warranty.usedClaims.toString() + '<br>'
+        html += 'Status: ' + this.getWarrantyStatusText(warranty.status) + '<br>'
+        html += 'Visibility: ' + (result[7] ? '✅ Visible' : '❌ Hidden') + '<br>'
         html += '</div>'
 
         this.state.results.detailsResult = html
       } catch (error) {
-        appStore.updateResult('detailsResult', '错误: ' + error.message, 'error')
+        appStore.updateResult('detailsResult', 'Error: ' + error.message, 'error')
       }
     },
 
@@ -473,16 +483,18 @@ export default {
         )
 
         let html = '<div class="info">'
-        html += '<strong>保修状态:</strong><br>'
-        html += '状态: ' + this.getWarrantyStatusText(result[0]) + '<br>'
-        html += '剩余申请次数: ' + result[1].toString() + '<br>'
+        html += '<strong>Warranty Status:</strong><br>'
+        html += 'Status: ' + this.getWarrantyStatusText(result[0]) + '<br>'
+        html += 'Remaining Claims: ' + result[1].toString() + '<br>'
         html +=
-          '过期时间: ' + new Date(parseInt(result[2].toString()) * 1000).toLocaleString() + '<br>'
+          'Expiration Time: ' +
+          new Date(parseInt(result[2].toString()) * 1000).toLocaleString() +
+          '<br>'
         html += '</div>'
 
         this.state.results.warrantyResult = html
       } catch (error) {
-        appStore.updateResult('warrantyResult', '错误: ' + error.message, 'error')
+        appStore.updateResult('warrantyResult', 'Error: ' + error.message, 'error')
       }
     },
 
@@ -491,15 +503,15 @@ export default {
         const result = await contractService.getOwnershipHistory(this.state.historyForm.productId)
 
         let html = '<div class="info">'
-        html += '<strong>所有权历史:</strong><br>'
+        html += '<strong>Ownership History:</strong><br>'
         html += '<ul>'
         result.forEach((record, index) => {
           html += `<li>
-            所有者: ${record.owner}<br>
-            角色: ${this.getRoleText(record.role)}<br>
-            转移时间: ${new Date(parseInt(record.transferTimestamp.toString()) * 1000).toLocaleString()}<br>
-            交易详情: ${record.transactionDetails}<br>
-            可见性: ${record.isVisible ? '✅ 是' : '❌ 否'}
+            Owner: ${record.owner}<br>
+            Role: ${this.getRoleText(record.role)}<br>
+            Transfer Time: ${new Date(parseInt(record.transferTimestamp.toString()) * 1000).toLocaleString()}<br>
+            Transaction Details: ${record.transactionDetails}<br>
+            Visibility: ${record.isVisible ? '✅ Yes' : '❌ No'}
           </li>`
         })
         html += '</ul>'
@@ -507,7 +519,7 @@ export default {
 
         this.state.results.historyResult = html
       } catch (error) {
-        appStore.updateResult('historyResult', '错误: ' + error.message, 'error')
+        appStore.updateResult('historyResult', 'Error: ' + error.message, 'error')
       }
     },
 
@@ -518,22 +530,22 @@ export default {
         )
 
         let html = '<div class="info">'
-        html += '<strong>保修历史:</strong><br>'
+        html += '<strong>Warranty History:</strong><br>'
         if (result.length === 0) {
-          html += '暂无保修记录<br>'
+          html += 'No warranty records<br>'
         } else {
           html += '<ul>'
           result.forEach((claim) => {
             html += `<li>
-              申请ID: ${claim.claimId.toString()}<br>
-              客户: ${claim.customer}<br>
-              服务中心: ${claim.serviceCenter || '未处理'}<br>
-              描述: ${claim.description}<br>
-              服务说明: ${claim.serviceNotes || '未处理'}<br>
-              提交时间: ${new Date(parseInt(claim.submitTimestamp.toString()) * 1000).toLocaleString()}<br>
-              处理时间: ${claim.processTimestamp ? new Date(parseInt(claim.processTimestamp.toString()) * 1000).toLocaleString() : '未处理'}<br>
-              状态: ${this.getClaimStatusText(claim.status)}<br>
-              可见性: ${claim.isVisible ? '✅ 是' : '❌ 否'}<br>
+              Claim ID: ${claim.claimId.toString()}<br>
+              Customer: ${claim.customer}<br>
+              Service Center: ${claim.serviceCenter || 'Not Processed'}<br>
+              Description: ${claim.description}<br>
+              Service Notes: ${claim.serviceNotes || 'Not Processed'}<br>
+              Submit Time: ${new Date(parseInt(claim.submitTimestamp.toString()) * 1000).toLocaleString()}<br>
+              Process Time: ${claim.processTimestamp ? new Date(parseInt(claim.processTimestamp.toString()) * 1000).toLocaleString() : 'Not Processed'}<br>
+              Status: ${this.getClaimStatusText(claim.status)}<br>
+              Visibility: ${claim.isVisible ? '✅ Yes' : '❌ No'}<br>
             </li>`
           })
           html += '</ul>'
@@ -542,52 +554,52 @@ export default {
 
         this.state.results.warrantyHistoryResult = html
       } catch (error) {
-        appStore.updateResult('warrantyHistoryResult', '错误: ' + error.message, 'error')
+        appStore.updateResult('warrantyHistoryResult', 'Error: ' + error.message, 'error')
       }
     },
 
     getWarrantyStatusText(status) {
       const statusMap = {
-        0: 'Active (激活)',
-        1: 'Expired (过期)',
-        2: 'Revoked (撤销)',
-        3: 'ClaimLimitReached (达到申请上限)',
+        0: 'Active',
+        1: 'Expired',
+        2: 'Revoked',
+        3: 'Claim Limit Reached',
       }
       return statusMap[status] || 'Unknown'
     },
 
     getRoleText(role) {
       const roleMap = {
-        0: 'None (无)',
-        1: 'Manufacturer (制造商)',
-        2: 'Retailer (零售商)',
-        3: 'Customer (消费者)',
-        4: 'ServiceCenter (服务中心)',
+        0: 'None',
+        1: 'Manufacturer',
+        2: 'Retailer',
+        3: 'Customer',
+        4: 'Service Center',
       }
       return roleMap[role] || 'Unknown'
     },
 
     getClaimStatusText(status) {
       const statusMap = {
-        0: 'Pending (待处理)',
-        1: 'Approved (已批准)',
-        2: 'Rejected (已拒绝)',
-        3: 'Completed (已完成)',
+        0: 'Pending',
+        1: 'Approved',
+        2: 'Rejected',
+        3: 'Completed',
       }
       return statusMap[status] || 'Unknown'
     },
   },
 
   async mounted() {
-    // 自动尝试连接钱包
+    // Automatically try to connect wallet
     if (window.ethereum) {
       try {
         const result = await contractService.connectWallet()
-        // 确保更新store中的web3和accounts
+        // Ensure web3 and accounts are updated in store
         this.state.web3 = result.web3
         this.state.accounts = result.accounts
       } catch (error) {
-        console.log('未自动连接钱包')
+        console.log('Wallet not auto-connected')
       }
     }
   },
@@ -771,7 +783,7 @@ button:disabled {
   margin-bottom: 20px;
 }
 
-/* 响应式设计 */
+/* Responsive Design */
 @media (max-width: 768px) {
   body {
     padding: 10px;

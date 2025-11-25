@@ -10,13 +10,13 @@ class AppStore {
       contractAddress: '0x9450456c3a25a57b9725e49a3ec4e1b71244ff86',
       activeTab: 'RoleManagement',
       tabs: [
-        { id: 'RoleManagement', name: '角色管理' },
-        { id: 'Product', name: '产品管理' },
-        { id: 'Warranty', name: '保修管理' },
-        { id: 'Query', name: '查询验证' },
+        { id: 'RoleManagement', name: 'Role Management' },
+        { id: 'Product', name: 'Product Management' },
+        { id: 'Warranty', name: 'Warranty Management' },
+        { id: 'Query', name: 'Query & Verification' },
       ],
 
-      // 表单数据
+      // Form data
       roleForm: {
         userAddress: '',
         role: '1',
@@ -69,7 +69,7 @@ class AppStore {
         productId: '',
       },
 
-      // 结果显示
+      // Results display
       results: {
         roleResult: '',
         serviceCenterResult: '',
@@ -85,7 +85,7 @@ class AppStore {
         warrantyHistoryResult: '',
       },
 
-      // 状态信息
+      // Status information
       status: {
         message: '',
         type: '',

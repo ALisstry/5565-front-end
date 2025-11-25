@@ -10,17 +10,17 @@ class ContractService {
     this.accounts = []
   }
 
-  // 连接钱包
+  // Connect Wallet
   async connectWallet() {
     if (!window.ethereum) {
-      throw new Error('请安装MetaMask!')
+      throw new Error('Please install MetaMask!')
     }
 
     this.web3 = new Web3(window.ethereum)
     await window.ethereum.request({ method: 'eth_requestAccounts' })
     this.accounts = await this.web3.eth.getAccounts()
 
-    // 更新store中的web3和accounts
+    // Update web3 and accounts in store
     const state = appStore.getState()
     state.web3 = this.web3
     state.accounts = this.accounts
@@ -31,34 +31,35 @@ class ContractService {
     }
   }
 
-  // 加载合约
+  // Load Contract
   async loadContract(contractAddress) {
     if (!this.web3) {
-      throw new Error('请先连接钱包!')
+      throw new Error('Please connect wallet first!')
     }
 
     if (!contractAddress) {
-      throw new Error('请输入合约地址!')
+      throw new Error('Please enter contract address!')
     }
 
-    // 验证地址格式
+    // Validate address format
     if (!this.web3.utils.isAddress(contractAddress)) {
-      throw new Error('合约地址格式不正确!')
+      throw new Error('Invalid contract address format!')
     }
 
     this.contract = new this.web3.eth.Contract(contractABI, contractAddress)
 
-    // 验证合约是否有效 - 通过调用一个简单的只读方法
+    // Validate if contract is valid - by calling a simple read-only method
     try {
-      // 使用零地址调用getRole方法，这总是会返回一个值（即使为0），但可以验证合约是否存在
+      // Call getRole method with zero address, which always returns a value (even 0),
+      // but can verify if contract exists
       await this.contract.methods.getRole('0x0000000000000000000000000000000000000000').call()
     } catch (error) {
       this.contract = null
-      console.error('合约验证失败:', error)
-      throw new Error('合约地址无效，请确认合约已部署')
+      console.error('Contract validation failed:', error)
+      throw new Error('Invalid contract address, please confirm contract is deployed')
     }
 
-    // 更新store中的contract
+    // Update contract in store
     const state = appStore.getState()
     state.contract = this.contract
     state.contractAddress = contractAddress
@@ -66,22 +67,22 @@ class ContractService {
     return this.contract
   }
 
-  // 检查是否已连接
+  // Check if connected
   isConnected() {
     return !!this.web3
   }
 
-  // 检查合约是否已加载
+  // Check if contract is loaded
   isContractLoaded() {
     return !!this.contract
   }
 
-  // 获取当前账户
+  // Get current account
   getCurrentAccount() {
     return this.accounts.length > 0 ? this.accounts[0] : null
   }
 
-  // 角色管理相关方法
+  // Role management methods
   async assignRole(userAddress, role) {
     this._validateContractCall()
     return await this.contract.methods
@@ -94,7 +95,7 @@ class ContractService {
     return await this.contract.methods.addServiceCenter(address).send({ from: this.accounts[0] })
   }
 
-  // 产品管理相关方法
+  // Product management methods
   async registerProduct(productData) {
     this._validateContractCall()
     const { productId, serialNumber, model, specifications, warrantyDuration, maxClaims } =
@@ -108,7 +109,7 @@ class ContractService {
     this._validateContractCall()
     const { productId, targetAddress, transactionDetails, transferType } = transferData
 
-    // 根据转移类型调用不同方法
+    // Call different methods based on transfer type
     switch (transferType) {
       case 'manufacturerToRetailer':
         return await this.contract.methods
@@ -123,11 +124,11 @@ class ContractService {
           .resellProduct(productId, targetAddress, transactionDetails)
           .send({ from: this.accounts[0] })
       default:
-        throw new Error('无效的转移类型')
+        throw new Error('Invalid transfer type')
     }
   }
 
-  // 保修管理相关方法
+  // Warranty management methods
   async submitWarrantyClaim(productId, description) {
     this._validateContractCall()
     return await this.contract.methods
@@ -149,7 +150,7 @@ class ContractService {
       .send({ from: this.accounts[0] })
   }
 
-  // 查询验证相关方法
+  // Query and verification methods
   async verifyOwnership(productId) {
     this._validateContractCall()
     return await this.contract.methods
@@ -198,18 +199,18 @@ class ContractService {
     return await this.contract.methods.isServiceCenter(userAddress).call({ from: this.accounts[0] })
   }
 
-  // 验证合约调用的私有方法
+  // Private method to validate contract calls
   _validateContractCall() {
     if (!this.web3) {
-      throw new Error('请先连接钱包!')
+      throw new Error('Please connect wallet first!')
     }
 
     if (!this.contract) {
-      throw new Error('请先加载合约!')
+      throw new Error('Please load contract first!')
     }
 
     if (this.accounts.length === 0) {
-      throw new Error('未检测到账户，请重新连接钱包!')
+      throw new Error('No account detected, please reconnect wallet!')
     }
   }
 }
