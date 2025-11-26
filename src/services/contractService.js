@@ -1,6 +1,6 @@
 // src/services/contractService.js
 import Web3 from 'web3'
-import contractABI from 'src\ABI\contractABI.json'
+import contractABI from '../ABI/contractABI.json'
 import appStore from '../store/appStore.js'
 
 class ContractService {

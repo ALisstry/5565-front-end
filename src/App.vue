@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>🔗 Product Provenance dApp</h1>
+    <h1>5565 dApp</h1>
 
     <div class="account-info" id="accountInfo">
       <strong>Connection Status:</strong>
